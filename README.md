@@ -43,20 +43,49 @@ That's it. No re-explaining. No codebase re-exploration.
 
 ### Prerequisites
 - [OpenCode](https://opencode.ai) installed
+- Node.js 18+ (for the CLI installer)
 - A project with a git repository
 
-### Quick Start
+### One-Command Install (Recommended)
 
 ```bash
-# 1. Clone or copy the skill into your project
-cp -r lcs-core/lcs-core ~/.config/opencode/skills/lcs-core
+npx lean-coding-skills add https://github.com/mdhb2/lean-coding-skills
+```
 
-# 2. Copy the scaffolding into your project
-cp -r lcs-core/.lcscore your-project/.lcscore
+This installs the LCS Core skill to `~/.config/opencode/skills/lcs-core/` and downloads scaffolding templates.
 
-# 3. Customize RULES.md and ROADMAP.md for your project
-vim your-project/.lcscore/RULES.md
-vim your-project/.lcscore/ROADMAP.md
+**After global install**, use the short form:
+```bash
+npm i -g lean-coding-skills
+skills add https://github.com/mdhb2/lean-coding-skills
+```
+
+### Manual Install
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/mdhb2/lean-coding-skills.git
+
+# 2. Copy the skill
+cp -r lean-coding-skills/lcs-core ~/.config/opencode/skills/lcs-core
+
+# 3. Scaffold your project
+npx lean-coding-skills scaffold
+```
+
+### CLI Commands
+
+```bash
+# With npx (no install needed):
+npx lean-coding-skills add <url>       # Install skill(s) from a GitHub repo
+npx lean-coding-skills list            # List installed skills
+npx lean-coding-skills remove <name>   # Remove a skill
+npx lean-coding-skills scaffold        # Create .lcscore/ in current project
+
+# After npm i -g lean-coding-skills (short form):
+skills add https://github.com/mdhb2/lean-coding-skills
+skills list
+skills scaffold
 ```
 
 The skill auto-loads whenever you ask the AI to do coding work in any project that has a `.lcscore/` directory.
