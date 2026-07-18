@@ -1,4 +1,4 @@
-# LCS Core — Product Requirements Document v2
+﻿# LCS Core ΓÇö Product Requirements Document v2
 
 > File: `lcs-core-prd.md`
 > Status: Final
@@ -8,7 +8,7 @@
 
 ## 1. Purpose
 
-LCS Core is a minimal system that enables an AI in a fresh OpenCode session to **immediately resume work without re-explanation**, follow consistent coding rules, and report status to the project roadmap — all with the lowest possible token overhead.
+LCS Core is a minimal system that enables an AI in a fresh OpenCode session to **immediately resume work without re-explanation**, follow consistent coding rules, and report status to the project roadmap ΓÇö all with the lowest possible token overhead.
 
 The developer acts only as a manager: read the roadmap, tell the AI to work, review the results.
 
@@ -20,10 +20,10 @@ The developer acts only as a manager: read the roadmap, tell the AI to work, rev
 
 | Problem | Root Cause | Impact |
 |---|---|---|
-| Fresh AI session has zero context — must re-explain from scratch | AI context is not persistent across sessions | Wasted tokens, wasted time, frustration |
+| Fresh AI session has zero context ΓÇö must re-explain from scratch | AI context is not persistent across sessions | Wasted tokens, wasted time, frustration |
 | Fresh AI session re-explores the entire codebase | No record of "where we left off" | 40-60% of new session tokens burned on discovery |
 | AI forgets architectural decisions from previous sessions | Decisions only existed in the lost context | Inconsistency, re-research, contradictory decisions |
-| Coding rules are written but never followed | No enforcement — only suggestions | Quality degradation, constant refactoring |
+| Coding rules are written but never followed | No enforcement ΓÇö only suggestions | Quality degradation, constant refactoring |
 | No "next action" without re-reading everything | No resume mechanism | User remains project manager + developer |
 
 ### Actual root cause:
@@ -41,7 +41,7 @@ Root cause: **AI has no persistent memory across sessions, and there is no light
 > **"Save a small amount of strategic context, not a log of everything. Save tokens at load time, save hundreds of tokens at re-discovery time."**
 
 Design principles:
-- **Context first, tracking second.** The primary goal is giving the AI context to RESUME — not merely recording what already happened.
+- **Context first, tracking second.** The primary goal is giving the AI context to RESUME ΓÇö not merely recording what already happened.
 - **Mandatory vs optional is driven by impact.** Architectural decisions = mandatory. Task breakdowns = optional.
 - **Git is the SOT.** The state file is a derived view from git log, not a manually maintained parallel source.
 - **Platform: OpenCode only.** Focus on one platform. Only expand when proven necessary.
@@ -50,28 +50,28 @@ Design principles:
 
 ```
 project/
-├── .lcscore/
-│   ├── CONTEXT.md          ← SESSION HANDOFF — the most important file
-│   ├── RULES.md            ← Coding rules the AI MUST follow
-│   ├── ROADMAP.md          ← Feature/task list with priorities
-│   ├── state.md            ← Derived view from git log (SRC-ID list)
-│   └── decisions/          ← Decision log — MANDATORY
-│       ├── 2026-07-18-redis-vs-sqlite.md
-│       └── 2026-07-18-api-architecture-choice.md
-│
-└── ~/.config/opencode/skills/lcs-core/SKILL.md   ← Auto-load trigger
+Γö£ΓöÇΓöÇ .lcscore/
+Γöé   Γö£ΓöÇΓöÇ CONTEXT.md          ΓåÉ SESSION HANDOFF ΓÇö the most important file
+Γöé   Γö£ΓöÇΓöÇ RULES.md            ΓåÉ Coding rules the AI MUST follow
+Γöé   Γö£ΓöÇΓöÇ ROADMAP.md          ΓåÉ Feature/task list with priorities
+Γöé   Γö£ΓöÇΓöÇ state.md            ΓåÉ Derived view from git log (SRC-ID list)
+Γöé   ΓööΓöÇΓöÇ decisions/          ΓåÉ Decision log ΓÇö MANDATORY
+Γöé       Γö£ΓöÇΓöÇ 2026-07-18-redis-vs-sqlite.md
+Γöé       ΓööΓöÇΓöÇ 2026-07-18-api-architecture-choice.md
+Γöé
+ΓööΓöÇΓöÇ ~/.config/opencode/skills/lcs-core/SKILL.md   ΓåÉ Auto-load trigger
 ```
 
 | File | Function | Required? | Written by |
 |---|---|---|---|
-| **CONTEXT.md** | Handoff artifact — session resume summary | **Mandatory** | AI (end of each session / before new session) |
+| **CONTEXT.md** | Handoff artifact ΓÇö session resume summary | **Mandatory** | AI (end of each session / before new session) |
 | **RULES.md** | Coding rules the AI must follow | **Mandatory** | User (write once) |
 | **ROADMAP.md** | Feature/task list with priorities and order | **Mandatory** | User (write once, update periodically) |
-| **state.md** | Derived view — SRC-ID list from git log | **Auto** | AI (generated from `git log`) |
+| **state.md** | Derived view ΓÇö SRC-ID list from git log | **Auto** | AI (generated from `git log`) |
 | **decisions/** | Architectural decision log | **Mandatory when decisions exist** | AI (when a decision is made) |
 | **SKILL.md** | Auto-load trigger + instructions | **Mandatory** | Provided by system |
 
-### 3.3 CONTEXT.md — Session Handoff (most important file)
+### 3.3 CONTEXT.md ΓÇö Session Handoff (most important file)
 
 **Purpose:** This file is read by the AI in the first second of a new session. After reading ~50-100 lines, the AI must **immediately know what to do** without re-exploring the codebase.
 
@@ -92,7 +92,7 @@ A minimal session handoff & tracking system for personal coding projects. Curren
 Finished writing PRD v2 in `lcs-core-prd.md`. Haven't started coding yet.
 
 ## Files being worked on
-- `lcs-core-prd.md` — PRD revision (done)
+- `lcs-core-prd.md` ΓÇö PRD revision (done)
 - No code files touched yet
 
 ## Key decisions made
@@ -104,35 +104,35 @@ Finished writing PRD v2 in `lcs-core-prd.md`. Haven't started coding yet.
 ## Architecture
 ```
 project/
-├── .lcscore/
-│   ├── CONTEXT.md    ← session handoff
-│   ├── RULES.md      ← coding rules
-│   ├── ROADMAP.md    ← project roadmap
-│   ├── state.md      ← derived from git log
-│   └── decisions/    ← mandatory decision log
+Γö£ΓöÇΓöÇ .lcscore/
+Γöé   Γö£ΓöÇΓöÇ CONTEXT.md    ΓåÉ session handoff
+Γöé   Γö£ΓöÇΓöÇ RULES.md      ΓåÉ coding rules
+Γöé   Γö£ΓöÇΓöÇ ROADMAP.md    ΓåÉ project roadmap
+Γöé   Γö£ΓöÇΓöÇ state.md      ΓåÉ derived from git log
+Γöé   ΓööΓöÇΓöÇ decisions/    ΓåÉ mandatory decision log
 ```
 
 ## Current blockers / open questions
 - Need user validation: is the .lcscore/ structure sufficient?
 
 ## Next action
-1. After user approves the PRD → start implementing SKILL.md
+1. After user approves the PRD ΓåÆ start implementing SKILL.md
 2. Create the first .lcscore/CONTEXT.md file
 
 ## Relevant files
-- `lcs-core-prd.md` — final PRD
+- `lcs-core-prd.md` ΓÇö final PRD
 ```
 
 **Rules for writing CONTEXT.md:**
 - **AI updates it at the end of every session** (before context reset / before user exits)
 - **AI reads it at the start of every new session** (triggered by SKILL.md auto-load)
-- **Maximum 100 lines.** If longer, something is wrong — too much technical detail.
-- **"Next action" must be actionable** — not "continue working," but "debug auth middleware in `src/auth.ts`, error 401 at line 42."
-- **"Relevant files" must be specific** — file paths being actively worked on, not the entire project.
+- **Maximum 100 lines.** If longer, something is wrong ΓÇö too much technical detail.
+- **"Next action" must be actionable** ΓÇö not "continue working," but "debug auth middleware in `src/auth.ts`, error 401 at line 42."
+- **"Relevant files" must be specific** ΓÇö file paths being actively worked on, not the entire project.
 
-### 3.4 RULES.md — Coding Standards Enforcement
+### 3.4 RULES.md ΓÇö Coding Standards Enforcement
 
-**Purpose:** This file ensures the AI follows the same coding rules in EVERY session. Read at the start of every session. The AI must comply — this is not a suggestion.
+**Purpose:** This file ensures the AI follows the same coding rules in EVERY session. Read at the start of every session. The AI must comply ΓÇö this is not a suggestion.
 
 ```markdown
 # Coding Rules
@@ -144,7 +144,7 @@ project/
 
 ## Structure
 - 1 file = 1 responsibility
-- Max 200 lines per file (hard limit — split if exceeded)
+- Max 200 lines per file (hard limit ΓÇö split if exceeded)
 - Shared utilities in `/shared/`, not copy-pasted
 
 ## Testing
@@ -154,7 +154,7 @@ project/
 ## Git
 - Commit message: `SRC-{ID}: imperative description`
 - 1 commit = 1 logical change
-- Never commit directly to main — use branches
+- Never commit directly to main ΓÇö use branches
 
 ## Prohibitions
 - No `any` in TypeScript
@@ -165,10 +165,10 @@ project/
 
 **Rules:**
 - User writes once. AI reads every session.
-- Rules must be **enforceable** — the AI must be able to verify compliance.
+- Rules must be **enforceable** ΓÇö the AI must be able to verify compliance.
 - If a rule is violated, the AI records it in CONTEXT.md as a "known violation" with the reason.
 
-### 3.5 ROADMAP.md — Project Roadmap
+### 3.5 ROADMAP.md ΓÇö Project Roadmap
 
 **Purpose:** The developer (as manager) can see project status at a glance. The AI knows priorities and work order.
 
@@ -198,7 +198,7 @@ project/
 - AI must NOT change priority order without user confirmation.
 - AI MAY add items to the backlog (new ideas discovered during work).
 
-### 3.6 state.md — Derived State View
+### 3.6 state.md ΓÇö Derived State View
 
 **Purpose:** Compact view of git log. Generated, not manual.
 
@@ -222,10 +222,10 @@ total_src: 2
 **Rules:**
 - Generated from `git log --grep="SRC-" --oneline`
 - NEVER written manually
-- Read as a quick reference — NOT as the source of truth
+- Read as a quick reference ΓÇö NOT as the source of truth
 - Status inferred from SRC-ID naming convention (can be manually overridden when needed)
 
-### 3.7 decisions/ — Decision Log (MANDATORY)
+### 3.7 decisions/ ΓÇö Decision Log (MANDATORY)
 
 **Purpose:** Records WHY architectural decisions were made. This is the most expensive thing to re-discover.
 
@@ -248,7 +248,7 @@ Need a session store for 3 microservices. Options: Redis (dedicated service) or 
 | SQLite | Zero ops, simple | Not shared across processes, locking issues |
 
 ## Decision
-**Redis** — because shared state across services is a hard requirement. Ops overhead is worth it.
+**Redis** ΓÇö because shared state across services is a hard requirement. Ops overhead is worth it.
 
 ## Consequences
 - Add 1 Redis container to docker-compose
@@ -258,7 +258,7 @@ Need a session store for 3 microservices. Options: Redis (dedicated service) or 
 
 **Rules:**
 - **Mandatory** every time a non-trivial decision is made (library choice, architecture, pattern, trade-off)
-- AI writes it — user does not need to ask
+- AI writes it ΓÇö user does not need to ask
 - AI reads it in a new session when touching the relevant area
 
 ### 3.8 SRC-ID (unchanged from v1, minus rename)
@@ -270,20 +270,20 @@ Format: `SRC-{YYMMDD}-{slug}`
 - Slug stays at max 5 words, lowercase, hyphens.
 - SRC-ID is mandatory in commit messages and file headers.
 
-### 3.9 SKILL.md — Trigger + Instructions
+### 3.9 SKILL.md ΓÇö Trigger + Instructions
 
 SKILL.md is the trigger file that makes LCS Core auto-load in every OpenCode session. It contains instructions for the AI on what to do at session start.
 
 **SKILL.md contents (specification, not full content):**
-1. Aggressive trigger description — loads whenever the user asks for coding work
-2. Step 1: Read `.lcscore/CONTEXT.md` → understand the last known state
-3. Step 2: Read `.lcscore/RULES.md` → comply with rules
-4. Step 3: Read `.lcscore/ROADMAP.md` → know priorities
-5. Step 4: Work — ambiguous tasks trigger Explore (3-question decision board)
-6. Step 5: After Explore → offer Autopilot mode (Y/N)
+1. Aggressive trigger description ΓÇö loads whenever the user asks for coding work
+2. Step 1: Read `.lcscore/CONTEXT.md` ΓåÆ understand the last known state
+3. Step 2: Read `.lcscore/RULES.md` ΓåÆ comply with rules
+4. Step 3: Read `.lcscore/ROADMAP.md` ΓåÆ know priorities
+5. Step 4: Work ΓÇö ambiguous tasks trigger Explore (3-question decision board)
+6. Step 5: After Explore ΓåÆ offer Autopilot mode (Y/N)
 7. Step 6: Autopilot: auto-execute all tasks with auto-commit, halt only on high-risk/architecture changes
-8. Step 7: Before session ends → update CONTEXT.md
-9. Verification checklist — git log, state.md auto-generate, decision log
+8. Step 7: Before session ends ΓåÆ update CONTEXT.md
+9. Verification checklist ΓÇö git log, state.md auto-generate, decision log
 
 #### 3.9.1 Autopilot Mode
 
@@ -294,7 +294,7 @@ After Explore completes and scope is clear, the AI MUST ask the user:
 **If YES:**
 - AI executes ALL tasks from ROADMAP/Explore output until everything is `done`
 - Auto-commit after each logical change with `SRC-{ID}: description`
-- Zero user questions — AI makes the best decision and records it
+- Zero user questions ΓÇö AI makes the best decision and records it
 - Updates CONTEXT.md after every commit, regenerates state.md periodically
 
 **Autopilot stop triggers (AI MUST halt and write blocker note to CONTEXT.md):**
@@ -306,20 +306,20 @@ After Explore completes and scope is clear, the AI MUST ask the user:
 | Would violate RULES.md with no clear justification | Halt + note the conflict |
 | All tasks complete | Finalize CONTEXT.md with `done`, final commit |
 
-When autopilot halts, the user reviews the blocker note and decides — then can restart autopilot or switch to interactive.
+When autopilot halts, the user reviews the blocker note and decides ΓÇö then can restart autopilot or switch to interactive.
 
 **If NO:**
-- Standard interactive workflow: explore → implement → ask → review
+- Standard interactive workflow: explore ΓåÆ implement ΓåÆ ask ΓåÆ review
 - User consulted for decisions, approvals, and direction changes
 
 Total SKILL.md: ~200 lines.
 
-### 3.10 Explore Protocol — The Anti-Hallucination Gate
+### 3.10 Explore Protocol ΓÇö The Anti-Hallucination Gate
 
 **Purpose:** Explore is the shield against hallucination, assumption, and scope creep. Its job is to ensure AI and user are aligned BEFORE a single line of code is written.
 
 **When Explore auto-triggers:**
-- Task description is ambiguous (e.g., "Bikin payment system" — what kind of payment?)
+- Task description is ambiguous (e.g., "Bikin payment system" ΓÇö what kind of payment?)
 - Multiple valid approaches exist (REST vs GraphQL, SQLite vs PostgreSQL)
 - AI is not 100% confident about the codebase state or tech stack
 - User explicitly says "Explore dulu"
@@ -332,45 +332,45 @@ Total SKILL.md: ~200 lines.
 
 The defining property of LCS Core's Explore: **AI does NOT ask questions one by one. It batches 3 questions at once, each with pre-analyzed options and a clear recommendation.**
 
-This turns Explore from a Q&A session into a **decision board**. The user's job is not to answer — it's to **pick or approve**.
+This turns Explore from a Q&A session into a **decision board**. The user's job is not to answer ΓÇö it's to **pick or approve**.
 
 ```markdown
 # Template: AI presents 3 questions at once
 
 ## 3 Questions to align on the approach
 
-### Q1: Database — SQLite vs PostgreSQL?
-| Criteria | SQLite | PostgreSQL | ✅ Best |
+### Q1: Database ΓÇö SQLite vs PostgreSQL?
+| Criteria | SQLite | PostgreSQL | Γ£à Best |
 |---|---|---|---|
-| Setup effort | Zero — file-based | Need Docker/install | ✅ SQLite |
-| Concurrent writes | ❌ Single writer | ✅ Multi-writer | ✅ PostgreSQL |
-| Project size | Small (≤1 dev) | Any scale | ✅ PostgreSQL |
-| Current stack | Already in project | Would add dependency | ✅ SQLite |
+| Setup effort | Zero ΓÇö file-based | Need Docker/install | Γ£à SQLite |
+| Concurrent writes | Γ¥î Single writer | Γ£à Multi-writer | Γ£à PostgreSQL |
+| Project size | Small (Γëñ1 dev) | Any scale | Γ£à PostgreSQL |
+| Current stack | Already in project | Would add dependency | Γ£à SQLite |
 
-**Recommendation: SQLite** — the project doesn't have concurrent write requirements yet.
+**Recommendation: SQLite** ΓÇö the project doesn't have concurrent write requirements yet.
 PostgreSQL can be migrated later when needed (YAGNI).
 
-### Q2: Authentication — JWT vs Session-based?
+### Q2: Authentication ΓÇö JWT vs Session-based?
 | Criteria | JWT | Sessions |
 |---|---|---|
-| Stateless | ✅ Yes | ❌ Need DB/store |
-| Expiry control | ❌ Can't revoke easily | ✅ Can revoke anytime |
+| Stateless | Γ£à Yes | Γ¥î Need DB/store |
+| Expiry control | Γ¥î Can't revoke easily | Γ£à Can revoke anytime |
 | Setup complexity | Simple | Moderate (+ session store) |
-| Fits mobile/API | ✅ Yes | ✅ Yes |
+| Fits mobile/API | Γ£à Yes | Γ£à Yes |
 
-**Recommendation: JWT** — simpler, stateless, fits the API-first nature of this project.
+**Recommendation: JWT** ΓÇö simpler, stateless, fits the API-first nature of this project.
 
-### Q3: Deployment — Docker vs bare metal?
+### Q3: Deployment ΓÇö Docker vs bare metal?
 [Similar comparison with recommendation]
 
 ---
 
-👉 **Pick any option above, or tell me if you want a different approach.**
+≡ƒæë **Pick any option above, or tell me if you want a different approach.**
 ```
 
 **Why 3?** Psychological ceiling. More than 3 questions overwhelms the user. Fewer than 3 misses critical alignment. 3 is the sweet spot.
 
-**AI must always state its recommendation** — not leave decisions open-ended. The user should be able to say "Ok" and move on without thinking.
+**AI must always state its recommendation** ΓÇö not leave decisions open-ended. The user should be able to say "Ok" and move on without thinking.
 
 #### 3.10.2 Layperson Translation (User's Point 2)
 
@@ -379,7 +379,7 @@ If a question involves technical concepts the user may not be familiar with, the
 ```markdown
 ### Q2: Database Indexing Strategy
 
-*Plain language: Database indexing is like a book's index — it helps find
+*Plain language: Database indexing is like a book's index ΓÇö it helps find
 information faster without reading every page. But too many indexes slow down
 writing (like maintaining 10 different indexes for the same book).*
 
@@ -389,7 +389,7 @@ writing (like maintaining 10 different indexes for the same book).*
 | Index only critical paths | Balanced | May miss future queries |
 | No indexes (dev mode) | Fast to build | Slow queries in production |
 
-**Recommendation: Index only critical query paths** — the app is read-heavy
+**Recommendation: Index only critical query paths** ΓÇö the app is read-heavy
 with few write operations. Index the fields used in WHERE clauses.
 ```
 
@@ -413,7 +413,7 @@ After presenting the 3 questions and getting answers, the AI provides a **summar
 ### Decisions made:
 | Question | Choice | Rationale |
 |---|---|---|
-| Database | SQLite | YAGNI — can migrate later |
+| Database | SQLite | YAGNI ΓÇö can migrate later |
 | Auth | JWT | Stateless, API-first fit |
 | Deployment | Docker | Consistency across environments |
 
@@ -425,7 +425,7 @@ After presenting the 3 questions and getting answers, the AI provides a **summar
 - [x] Existing codebase patterns identified and will be followed
 
 ### Result
-✅ **Explore complete — ready to Execute.**
+Γ£à **Explore complete ΓÇö ready to Execute.**
 
 ---
 
@@ -434,43 +434,43 @@ If you want to explore further (deployment strategy, testing approach,
 observability), I can dive deeper.
 ```
 
-**If user says "Enough"** → AI asks: **"Autopilot mode? (Y/N)"** — see §3.9.1 for protocol. Then proceeds to Execute (autopilot or interactive, same session or new SRC).
+**If user says "Enough"** ΓåÆ AI asks: **"Autopilot mode? (Y/N)"** ΓÇö see ┬º3.9.1 for protocol. Then proceeds to Execute (autopilot or interactive, same session or new SRC).
 
-**If user says "Lanjut explore detail X"** → AI enters **Explore Deep Dive** — one more round of 3 sub-questions focused on the area the user chose. Then check again.
+**If user says "Lanjut explore detail X"** ΓåÆ AI enters **Explore Deep Dive** ΓÇö one more round of 3 sub-questions focused on the area the user chose. Then check again.
 
-**Max 2 rounds of Explore.** If after 2 rounds there's still ambiguity, the problem is bigger than Explore — it needs a Spec/PRD.
+**Max 2 rounds of Explore.** If after 2 rounds there's still ambiguity, the problem is bigger than Explore ΓÇö it needs a Spec/PRD.
 
 #### 3.10.4 Explore Funnel Diagram
 
 ```
 User: "Bikin fitur billing"
 
-    ▼
-┌─────────────────────────────┐
-│ 1. AI breakdown → 3 questions│ ← langsung kasih 3 + rekomendasi
-│ 2. User pick/approve         │
-└──────────┬──────────────────┘
-           ▼
-    ┌── cukup? ──┐
-    │            │
+    Γû╝
+ΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ
+Γöé 1. AI breakdown ΓåÆ 3 questionsΓöé ΓåÉ langsung kasih 3 + rekomendasi
+Γöé 2. User pick/approve         Γöé
+ΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö¼ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ
+           Γû╝
+    ΓöîΓöÇΓöÇ cukup? ΓöÇΓöÇΓöÉ
+    Γöé            Γöé
    YES           NO
-    │            │
-    ▼            ▼
- [Autopilot?] ┌────────────────────────┐
-  │   │       │ Deep Dive (1 round)    │ ← 3 sub-questions
- YES  NO      │ User pick/approve      │
-  │   │       └──────────┬─────────────┘
-  ▼   ▼                  ▼
- [Auto] [Interactive] ┌── cukup? ──┐
-  │                     │            │
-  │                    YES           NO
-  │                     │            │
-  ▼                     ▼            ▼
- Auto-execute        [Autopilot?] [→ Recommend Spec/PRD]
- all tasks,            │   │         lebih cocok untuk
+    Γöé            Γöé
+    Γû╝            Γû╝
+ [Autopilot?] ΓöîΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ
+  Γöé   Γöé       Γöé Deep Dive (1 round)    Γöé ΓåÉ 3 sub-questions
+ YES  NO      Γöé User pick/approve      Γöé
+  Γöé   Γöé       ΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö¼ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ
+  Γû╝   Γû╝                  Γû╝
+ [Auto] [Interactive] ΓöîΓöÇΓöÇ cukup? ΓöÇΓöÇΓöÉ
+  Γöé                     Γöé            Γöé
+  Γöé                    YES           NO
+  Γöé                     Γöé            Γöé
+  Γû╝                     Γû╝            Γû╝
+ Auto-execute        [Autopilot?] [ΓåÆ Recommend Spec/PRD]
+ all tasks,            Γöé   Γöé         lebih cocok untuk
  auto-commit,         YES  NO        kompleksitas ini
- halt on risk          │   │
-                        ▼   ▼
+ halt on risk          Γöé   Γöé
+                        Γû╝   Γû╝
                     [Auto] [Interactive]
 ```
 
@@ -495,26 +495,26 @@ User wants recurring billing for subscription feature
 
 | # | Question | User Choice | AI Recommendation |
 |---|---|---|---|
-| 1 | Payment gateway? | Midtrans (existing) | Midtrans — already integrated |
-| 2 | Database schema? | New `subscriptions` table | Same — keeps billing separate from orders |
-| 3 | Recurring trigger? | Midtrans webhook | Midtrans webhook — no cron needed |
+| 1 | Payment gateway? | Midtrans (existing) | Midtrans ΓÇö already integrated |
+| 2 | Database schema? | New `subscriptions` table | Same ΓÇö keeps billing separate from orders |
+| 3 | Recurring trigger? | Midtrans webhook | Midtrans webhook ΓÇö no cron needed |
 
 ## Summary
-✅ Ready to Execute. Scope: implement Midtrans subscription API integration
+Γ£à Ready to Execute. Scope: implement Midtrans subscription API integration
 with webhook handler for recurring billing events.
 
 ## What was ruled out
-- New payment gateway (Xendit/Stripe) — unnecessary migration
-- Cron-based billing — error-prone, no webhook reliability
-- Third-party subscription service — added dependency
+- New payment gateway (Xendit/Stripe) ΓÇö unnecessary migration
+- Cron-based billing ΓÇö error-prone, no webhook reliability
+- Third-party subscription service ΓÇö added dependency
 
 ## Unknowns resolved
-- ✅ Midtrans subscription API documented and usable
-- ✅ Webhook payload format known
-- ✅ Schema design validated against existing Order model
+- Γ£à Midtrans subscription API documented and usable
+- Γ£à Webhook payload format known
+- Γ£à Schema design validated against existing Order model
 
 ## Deep Dive needed?
-User said "Lanjut" → proceed to Execute
+User said "Lanjut" ΓåÆ proceed to Execute
 ```
 
 ---
@@ -527,11 +527,11 @@ User said "Lanjut" → proceed to Execute
 User: "Continue yesterday's work"
 
 AI: [auto-load SKILL.md]
-  → read .lcscore/CONTEXT.md
-  → read .lcscore/RULES.md
-  → read .lcscore/ROADMAP.md
-  → see "Next action: Implement SKILL.md content"
-  → start coding
+  ΓåÆ read .lcscore/CONTEXT.md
+  ΓåÆ read .lcscore/RULES.md
+  ΓåÆ read .lcscore/ROADMAP.md
+  ΓåÆ see "Next action: Implement SKILL.md content"
+  ΓåÆ start coding
 
 Total token cost for context load: ~400-800 tokens (CONTEXT.md ~100 lines)
 ```
@@ -542,12 +542,12 @@ Total token cost for context load: ~400-800 tokens (CONTEXT.md ~100 lines)
 User: "Implement login feature"
 
 AI: [auto-load SKILL.md]
-  → read .lcscore/CONTEXT.md → understand project state
-  → read .lcscore/RULES.md → know the rules
-  → read .lcscore/ROADMAP.md → check if login is on the roadmap
-  → assign new SRC-ID
-  → implement
-  → update CONTEXT.md (new "Next action" if not finished)
+  ΓåÆ read .lcscore/CONTEXT.md ΓåÆ understand project state
+  ΓåÆ read .lcscore/RULES.md ΓåÆ know the rules
+  ΓåÆ read .lcscore/ROADMAP.md ΓåÆ check if login is on the roadmap
+  ΓåÆ assign new SRC-ID
+  ΓåÆ implement
+  ΓåÆ update CONTEXT.md (new "Next action" if not finished)
 ```
 
 ### Scenario C: Context full, must reset mid-feature
@@ -556,16 +556,16 @@ AI: [auto-load SKILL.md]
 [Context full, AI starts to hallucinate]
 
 AI: [before reset / when prompted]
-  → update CONTEXT.md:
+  ΓåÆ update CONTEXT.md:
       - current_src: SRC-240718-implement-handoff-protocol
       - where_stopped: "Implemented step 2 of 5. src/handoff.ts lines 1-80 are complete."
       - next_action: "Continue with step 3: state.md auto-generator"
       - relevant_files: ["src/handoff.ts"]
-  → update decisions/ if new decisions were made
-  → git commit all changes with SRC-ID
+  ΓåÆ update decisions/ if new decisions were made
+  ΓåÆ git commit all changes with SRC-ID
 
 [New session]
-AI: [read CONTEXT.md] → immediately resume step 3 without asking the user
+AI: [read CONTEXT.md] ΓåÆ immediately resume step 3 without asking the user
 ```
 
 ---
@@ -589,12 +589,12 @@ SKILL.md at ~150 lines = ~400 tokens at load time. But this is a one-time cost p
 
 | Criterion | How to measure | Target |
 |---|---|---|
-| AI resumes work immediately without re-explanation | Open new session, prompt "Continue" — how many additional tokens does the AI require? | < 500 additional tokens |
-| AI consistently follows coding rules | Spot-check 10 commits — any RULES.md violations? | 0 violations |
-| Decision log gets written without being asked | `ls .lcscore/decisions/` — is there a file for every non-trivial feature? | 1+ decision per complex SRC |
-| CONTEXT.md is always up-to-date | Check before session reset — does CONTEXT.md reflect the latest state? | 100% |
-| Roadmap is scannable at a glance | ROADMAP.md < 50 lines for a typical project | ✓ |
-| No state-vs-git inconsistency | state.md = derived from git log — no manual diff | 0 inconsistencies |
+| AI resumes work immediately without re-explanation | Open new session, prompt "Continue" ΓÇö how many additional tokens does the AI require? | < 500 additional tokens |
+| AI consistently follows coding rules | Spot-check 10 commits ΓÇö any RULES.md violations? | 0 violations |
+| Decision log gets written without being asked | `ls .lcscore/decisions/` ΓÇö is there a file for every non-trivial feature? | 1+ decision per complex SRC |
+| CONTEXT.md is always up-to-date | Check before session reset ΓÇö does CONTEXT.md reflect the latest state? | 100% |
+| Roadmap is scannable at a glance | ROADMAP.md < 50 lines for a typical project | Γ£ô |
+| No state-vs-git inconsistency | state.md = derived from git log ΓÇö no manual diff | 0 inconsistencies |
 | New session context load < 1,000 tokens | Sum tokens from SKILL.md + CONTEXT.md + RULES.md + ROADMAP.md | < 1,000 tokens |
 
 ---
@@ -632,7 +632,7 @@ SKILL.md at ~150 lines = ~400 tokens at load time. But this is a one-time cost p
 | RULES.md is too strict, slowing the AI down | User controls rule intensity. Start with 5 rules, add gradually. |
 | Too many small decision files | One file per topic, not per day. Merge related decisions. |
 | state.md generator fails (no git history) | Fallback: manual state.md. But this only happens on brand-new projects. |
-| User doesn't maintain ROADMAP.md | ROADMAP.md can be very minimal — even 3 lines. Write once, update when priorities change. |
+| User doesn't maintain ROADMAP.md | ROADMAP.md can be very minimal ΓÇö even 3 lines. Write once, update when priorities change. |
 
 ---
 
@@ -642,12 +642,12 @@ SKILL.md at ~150 lines = ~400 tokens at load time. But this is a one-time cost p
 - npm publish
 - Cross-project dashboard
 - Chain of Truth / verification protocol
-- 7-phase pipeline (explore → PRD → SRS → slice → execute → review → finalize)
+- 7-phase pipeline (explore ΓåÆ PRD ΓåÆ SRS ΓåÆ slice ΓåÆ execute ΓåÆ review ΓåÆ finalize)
 - Artifact registry system
 - Self-improvement analyzer
 - Skill creation pipeline
 
-**This does not mean these will never be built — but they will be built ONE AT A TIME only when PROVEN NECESSARY after v1 has been used for at least 2 weeks.**
+**This does not mean these will never be built ΓÇö but they will be built ONE AT A TIME only when PROVEN NECESSARY after v1 has been used for at least 2 weeks.**
 
 ---
 
@@ -685,16 +685,16 @@ current_src: <SRC-YYMMDD-slug>
 <One-to-two sentences describing exactly what was last being done. Include file:line references.>
 
 ## Files being worked on
-- <path/to/file> — <what changed>
-- <path/to/file> — <what changed>
+- <path/to/file> ΓÇö <what changed>
+- <path/to/file> ΓÇö <what changed>
 
 ## Key decisions made
 - <Brief decision, max 1 line each>
-- <e.g., Using Prisma over raw SQL — need migrations>
+- <e.g., Using Prisma over raw SQL ΓÇö need migrations>
 
 ## Architecture
 ```
-<Quick architecture sketch — just relevant parts>
+<Quick architecture sketch ΓÇö just relevant parts>
 ```
 
 ## Current blockers / open questions
@@ -763,7 +763,7 @@ current_src: <SRC-YYMMDD-slug>
 
 ```markdown
 ---
-generated: <YYYY-MM-DDThh:mm:ss±hh:mm>
+generated: <YYYY-MM-DDThh:mm:ss┬▒hh:mm>
 source: git log --grep="SRC-" --oneline
 total_src: <count>
 ---
@@ -794,7 +794,7 @@ total_src: <count>
 | <option B> | <pro> | <con> |
 
 ## Decision
-**<chosen option>** — <why this option was selected over alternatives>
+**<chosen option>** ΓÇö <why this option was selected over alternatives>
 
 ## Consequences
 - <impact 1>
