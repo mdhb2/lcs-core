@@ -49,41 +49,41 @@ That's it. No re-explaining. No codebase re-exploration.
 ### One-Command Install (Recommended)
 
 ```bash
-npx lean-coding-skills add https://github.com/mdhb2/lean-coding-skills
+npx lcs-core add https://github.com/mdhb2/lcs-core
 ```
 
 This installs the LCS Core skill to `~/.config/opencode/skills/lcs-core/` and downloads scaffolding templates.
 
 **After global install**, use the short form:
 ```bash
-npm i -g lean-coding-skills
-skills add https://github.com/mdhb2/lean-coding-skills
+npm i -g lcs-core
+skills add https://github.com/mdhb2/lcs-core
 ```
 
 ### Manual Install
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/mdhb2/lean-coding-skills.git
+git clone https://github.com/mdhb2/lcs-core.git
 
 # 2. Copy the skill
-cp -r lean-coding-skills/lcs-core ~/.config/opencode/skills/lcs-core
+cp -r lcs-core/lcs-core ~/.config/opencode/skills/lcs-core
 
 # 3. Scaffold your project
-npx lean-coding-skills scaffold
+npx lcs-core scaffold
 ```
 
 ### CLI Commands
 
 ```bash
 # With npx (no install needed):
-npx lean-coding-skills add <url>       # Install skill(s) from a GitHub repo
-npx lean-coding-skills list            # List installed skills
-npx lean-coding-skills remove <name>   # Remove a skill
-npx lean-coding-skills scaffold        # Create .lcscore/ in current project
+npx lcs-core add <url>       # Install skill(s) from a GitHub repo
+npx lcs-core list            # List installed skills
+npx lcs-core remove <name>   # Remove a skill
+npx lcs-core scaffold        # Create .lcscore/ in current project
 
-# After npm i -g lean-coding-skills (short form):
-skills add https://github.com/mdhb2/lean-coding-skills
+# After npm i -g lcs-core (short form):
+skills add https://github.com/mdhb2/lcs-core
 skills list
 skills scaffold
 ```

@@ -4,16 +4,16 @@
  * LCS Core — Skills CLI
  *
  * Usage:
- *   npx lean-coding-skills add <github-url>
- *   npx lean-coding-skills list
- *   npx lean-coding-skills remove <name>
+ *   npx lcs-core add <github-url>
+ *   npx lcs-core list
+ *   npx lcs-core remove <name>
  *
- * After global install (npm i -g lean-coding-skills), use: skills add, skills list, etc.
+ * After global install (npm i -g lcs-core), use: skills add, skills list, etc.
  *
  * Examples:
- *   npx lean-coding-skills add https://github.com/mdhb2/lean-coding-skills
- *   npx lean-coding-skills list
- *   npx lean-coding-skills remove lcs-core
+ *   npx lcs-core add https://github.com/mdhb2/lcs-core
+ *   npx lcs-core list
+ *   npx lcs-core remove lcs-core
  */
 
 const fs = require('node:fs');
@@ -253,8 +253,8 @@ const command = args[0];
 switch (command) {
   case 'add':
     if (!args[1]) {
-      log('Usage: npx lean-coding-skills add <github-url>');
-      log('Example: npx lean-coding-skills add https://github.com/mdhb2/lean-coding-skills');
+      log('Usage: npx lcs-core add <github-url>');
+      log('Example: npx lcs-core add https://github.com/mdhb2/lcs-core');
       process.exit(1);
     }
     cmdAdd(args[1]).catch(e => error(e.message));
@@ -267,7 +267,7 @@ switch (command) {
   case 'remove':
   case 'rm':
     if (!args[1]) {
-      log('Usage: npx lean-coding-skills remove <name>');
+      log('Usage: npx lcs-core remove <name>');
       process.exit(1);
     }
     cmdRemove(args[1]);
@@ -283,18 +283,18 @@ switch (command) {
 log('LCS Core — Skills CLI');
 log('');
 log('Commands:');
-log('  npx lean-coding-skills add <url>       Install a skill from a GitHub repository');
-log('  npx lean-coding-skills list            List installed skills');
-log('  npx lean-coding-skills remove <name>   Remove an installed skill');
-log('  npx lean-coding-skills scaffold        Create .lcscore/ structure in current project');
+log('  npx lcs-core add <url>       Install a skill from a GitHub repository');
+log('  npx lcs-core list            List installed skills');
+log('  npx lcs-core remove <name>   Remove an installed skill');
+log('  npx lcs-core scaffold        Create .lcscore/ structure in current project');
 log('');
 log('Examples:');
-log('  npx lean-coding-skills add https://github.com/mdhb2/lean-coding-skills');
-log('  npx lean-coding-skills list');
+log('  npx lcs-core add https://github.com/mdhb2/lcs-core');
+log('  npx lcs-core list');
 log('');
-log('Tip: npm i -g lean-coding-skills && skills add <url>');
+log('Tip: npm i -g lcs-core && skills add <url>');
     break;
 
   default:
-    error(`Unknown command: ${command}\nTry: npx lean-coding-skills --help`);
+    error(`Unknown command: ${command}\nTry: npx lcs-core --help`);
 }

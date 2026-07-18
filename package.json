@@ -1,7 +1,7 @@
 {
-  "name": "lean-coding-skills",
+  "name": "lcs-core",
   "version": "1.0.0",
-  "description": "LCS Core — minimal session handoff and project context system for AI-assisted development. Install via npx lean-coding-skills add <url>.",
+  "description": "LCS Core — minimal session handoff and project context system for AI-assisted development. Install via npx lcs-core add <url>.",
   "bin": {
     "skills": "./cli/index.js"
   },

@@ -11,7 +11,7 @@ current_src: SRC-240718-cli-installer
 A minimal session handoff & tracking system for personal coding projects. The `.lcscore/` directory provides AI agents with persistent context across sessions — CONTEXT.md for resume, RULES.md for consistency, ROADMAP.md for priorities, decisions/ for architectural memory, and state.md for git-derived progress tracking.
 
 ## Where we stopped
-Phase 1 complete. Added npx-based CLI installer (`npx lean-coding-skills add <url>`), English README.md, Autopilot mode, and all core files. Skill installed and ready for session testing.
+Phase 1 complete. Added npx-based CLI installer (`npx lcs-core add <url>`), English README.md, Autopilot mode, and all core files. Skill installed and ready for session testing.
 
 ## Files being worked on
 - `lcs-core-prd.md` — PRD v2 (finalized)
@@ -32,7 +32,7 @@ Phase 1 complete. Added npx-based CLI installer (`npx lean-coding-skills add <ur
 - Decision log MANDATORY
 - Explore: 3-question decision board + layperson translation
 - WRITTEN MD: Autopilot mode — Y/N, auto-execute + auto-commit, halt on risk
-- WRITTEN MD: npx install via `npx lean-coding-skills add <url>`
+- WRITTEN MD: npx install via `npx lcs-core add <url>`
 
 ## Architecture
 ```
