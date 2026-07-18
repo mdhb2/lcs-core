@@ -1,7 +1,7 @@
 ﻿---
-generated: 2026-07-18T18:48:21+0700
+generated: 2026-07-18T18:52:15+0700
 source: git log --grep="SRC-" --oneline
-total_src: 8
+total_src: 10
 ---
 
 # LCS State (auto-generated from git log)
@@ -10,6 +10,8 @@ total_src: 8
 
 | SRC-ID | Commit | Status | Date |
 |---|---|---|---|
+| SRC-240718-readme | 0e76d9a SRC-240718-readme: Add English README.md and restore lcs-core-prd.md to working tree | in_progress | 260718 |
+| SRC-240718-skill-gaps | 04814fa SRC-240718-skill-gaps: Regenerate state.md | in_progress | 260718 |
 | SRC-240718-skill-gaps | 5b73362 SRC-240718-skill-gaps: Add SRC-ID format, layperson translation, explore output path, full CONTEXT update spec to SKILL.md | in_progress | 260718 |
 | SRC-240718-autopilot-mode | a489025 SRC-240718-autopilot-mode: Regenerate state.md | in_progress | 260718 |
 | SRC-240718-autopilot-mode | b16555a SRC-240718-autopilot-mode: Add autopilot mode to SKILL.md and PRD | in_progress | 260718 |
