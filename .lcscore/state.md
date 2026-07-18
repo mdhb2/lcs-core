@@ -1,7 +1,7 @@
 ﻿---
-generated: 2026-07-18T18:40:32+0700
+generated: 2026-07-18T18:48:21+0700
 source: git log --grep="SRC-" --oneline
-total_src: 6
+total_src: 8
 ---
 
 # LCS State (auto-generated from git log)
@@ -10,6 +10,8 @@ total_src: 6
 
 | SRC-ID | Commit | Status | Date |
 |---|---|---|---|
+| SRC-240718-skill-gaps | 5b73362 SRC-240718-skill-gaps: Add SRC-ID format, layperson translation, explore output path, full CONTEXT update spec to SKILL.md | in_progress | 260718 |
+| SRC-240718-autopilot-mode | a489025 SRC-240718-autopilot-mode: Regenerate state.md | in_progress | 260718 |
 | SRC-240718-autopilot-mode | b16555a SRC-240718-autopilot-mode: Add autopilot mode to SKILL.md and PRD | in_progress | 260718 |
 | SRC-240718-rename-lcscore | dc43dfb SRC-240718-rename-lcscore: Rename .lcs/ to .lcscore/ across all files | in_progress | 260718 |
 | SRC-240718-bootstrap-lcs-core | 1375f4c SRC-240718-bootstrap-lcs-core: Update CONTEXT.md status to done | in_progress | 260718 |
