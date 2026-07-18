@@ -1,7 +1,7 @@
 ﻿---
-generated: 2026-07-18T18:31:05+0700
+generated: 2026-07-18T18:31:44+0700
 source: git log --grep="SRC-" --oneline
-total_src: 1
+total_src: 2
 ---
 
 # LCS State (auto-generated from git log)
@@ -10,5 +10,6 @@ total_src: 1
 
 | SRC-ID | Commit | Status | Date |
 |---|---|---|---|
+| SRC-240718-bootstrap-lcs-core | 11be281 SRC-240718-bootstrap-lcs-core: Update ROADMAP status, fix script reference, regenerate state | in_progress | 260718 |
 | SRC-240718-bootstrap-lcs-core | e3b68b8 SRC-240718-bootstrap-lcs-core: Bootstrap LCS Core v2 ΓÇö core files, SKILL.md, state generator | in_progress | 260718 |
 
