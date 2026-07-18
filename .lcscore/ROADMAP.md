@@ -12,7 +12,7 @@
 | 6 | Build state.md auto-generator | SRC-240718-bootstrap-lcs-core | done | P0 |
 | 7 | Install SKILL.md in OpenCode | SRC-240718-bootstrap-lcs-core | done | P0 |
 | 8 | Add Autopilot mode to SKILL.md | SRC-240718-autopilot-mode | done | P0 |
-| 9 | Add npx-based CLI installer | SRC-240718-cli-installer | done | P0 |
+| 9 | Restructure for npx skills add compatibility | SRC-240718-skills-compat | done | P0 |
 | 10 | Write README.md | SRC-240718-readme | done | P0 |
 | 11 | Write decision log templates | SRC-240718-decision-template | todo | P1 |
 | 12 | Test: 3 consecutive sessions | SRC-240718-session-test | todo | P1 |

@@ -4,6 +4,10 @@
 
 LCS Core gives an AI agent instant context when you open a fresh coding session. No re-explaining. No re-exploring the codebase. No lost decisions.
 
+```bash
+npx skills add https://github.com/mdhb2/lcs-core
+```
+
 ---
 
 ## The Problem
@@ -42,23 +46,42 @@ That's it. No re-explaining. No codebase re-exploration.
 ## Installation
 
 ### Prerequisites
-- [OpenCode](https://opencode.ai) installed
-- Node.js 18+ (for the CLI installer)
+- [OpenCode](https://opencode.ai) installed (or Claude Code, Cursor, Windsurf, etc.)
+- Node.js 18+ (for `npx`)
 - A project with a git repository
 
-### One-Command Install (Recommended)
+### One-Command Install
 
 ```bash
-npx lcs-core add https://github.com/mdhb2/lcs-core
+npx skills add https://github.com/mdhb2/lcs-core
 ```
 
-This installs the LCS Core skill to `~/.config/opencode/skills/lcs-core/` and downloads scaffolding templates.
+This uses the [skills](https://github.com/vercel-labs/skills) CLI to install LCS Core into your agent's skills directory. Select **opencode** when prompted (or your preferred agent).
 
-**After global install**, use the short form:
+**Options:**
 ```bash
-npm i -g lcs-core
-skills add https://github.com/mdhb2/lcs-core
+# Install globally (available in all projects)
+npx skills add https://github.com/mdhb2/lcs-core -g
+
+# Install to a specific agent
+npx skills add https://github.com/mdhb2/lcs-core -a opencode
+
+# Skip prompts
+npx skills add https://github.com/mdhb2/lcs-core -y
 ```
+
+### Scaffold Your Project
+
+After installing the skill, create the `.lcscore/` directory in your project:
+
+```bash
+mkdir .lcscore .lcscore/decisions .lcscore/explore
+```
+
+Then customize for your project:
+- Edit `.lcscore/RULES.md` — your coding standards
+- Edit `.lcscore/ROADMAP.md` — your project tasks and priorities
+- `.lcscore/CONTEXT.md` — the AI maintains this automatically
 
 ### Manual Install
 
@@ -66,26 +89,8 @@ skills add https://github.com/mdhb2/lcs-core
 # 1. Clone the repo
 git clone https://github.com/mdhb2/lcs-core.git
 
-# 2. Copy the skill
-cp -r lcs-core/lcs-core ~/.config/opencode/skills/lcs-core
-
-# 3. Scaffold your project
-npx lcs-core scaffold
-```
-
-### CLI Commands
-
-```bash
-# With npx (no install needed):
-npx lcs-core add <url>       # Install skill(s) from a GitHub repo
-npx lcs-core list            # List installed skills
-npx lcs-core remove <name>   # Remove a skill
-npx lcs-core scaffold        # Create .lcscore/ in current project
-
-# After npm i -g lcs-core (short form):
-skills add https://github.com/mdhb2/lcs-core
-skills list
-skills scaffold
+# 2. Copy the skill to your agent's skills directory
+cp -r lcs-core/skills/lcs-core ~/.config/opencode/skills/lcs-core
 ```
 
 The skill auto-loads whenever you ask the AI to do coding work in any project that has a `.lcscore/` directory.
