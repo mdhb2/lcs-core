@@ -1,7 +1,7 @@
 ---
 project: lcs-core
 last_session: 2026-07-18
-status: in_progress
+status: done
 current_src: SRC-240718-bootstrap-lcs-core
 ---
 
