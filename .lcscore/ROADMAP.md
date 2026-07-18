@@ -4,7 +4,7 @@
 
 | # | Task | SRC-ID | Status | Priority |
 |---|---|---|---|---|
-| 1 | Create .lcs/ directory structure | SRC-240718-bootstrap-lcs-core | done | P0 |
+| 1 | Create .lcscore/ directory structure | SRC-240718-bootstrap-lcs-core | done | P0 |
 | 2 | Write CONTEXT.md template | SRC-240718-bootstrap-lcs-core | done | P0 |
 | 3 | Write RULES.md template | SRC-240718-bootstrap-lcs-core | done | P0 |
 | 4 | Write ROADMAP.md template | SRC-240718-bootstrap-lcs-core | done | P0 |

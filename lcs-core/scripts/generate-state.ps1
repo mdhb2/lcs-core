@@ -3,12 +3,12 @@
 .SYNOPSIS
     LCS Core — state.md auto-generator
 .DESCRIPTION
-    Generates .lcs/state.md from git log using SRC- prefixed commits.
+    Generates .lcscore/state.md from git log using SRC- prefixed commits.
     Git log is the source of truth; state.md is a derived cache.
 .PARAMETER Path
     Project root path. Defaults to the directory containing .git.
 .PARAMETER OutputFile
-    Output file path. Defaults to .lcs/state.md relative to project root.
+    Output file path. Defaults to .lcscore/state.md relative to project root.
 .EXAMPLE
     ./generate-state
     ./generate-state -Path ../my-project
@@ -47,7 +47,7 @@ if (-not (Test-Path $gitDir)) {
 
 # Resolve output path
 if (-not $OutputFile) {
-    $OutputFile = Join-Path $projectRoot '.lcs\state.md'
+    $OutputFile = Join-Path $projectRoot '.lcscore\state.md'
 }
 $lcsDir = Split-Path $OutputFile -Parent
 if (-not (Test-Path $lcsDir)) {

@@ -50,7 +50,7 @@ Design principles:
 
 ```
 project/
-├── .lcs/
+├── .lcscore/
 │   ├── CONTEXT.md          ← SESSION HANDOFF — the most important file
 │   ├── RULES.md            ← Coding rules the AI MUST follow
 │   ├── ROADMAP.md          ← Feature/task list with priorities
@@ -104,7 +104,7 @@ Finished writing PRD v2 in `lcs-core-prd.md`. Haven't started coding yet.
 ## Architecture
 ```
 project/
-├── .lcs/
+├── .lcscore/
 │   ├── CONTEXT.md    ← session handoff
 │   ├── RULES.md      ← coding rules
 │   ├── ROADMAP.md    ← project roadmap
@@ -113,11 +113,11 @@ project/
 ```
 
 ## Current blockers / open questions
-- Need user validation: is the .lcs/ structure sufficient?
+- Need user validation: is the .lcscore/ structure sufficient?
 
 ## Next action
 1. After user approves the PRD → start implementing SKILL.md
-2. Create the first .lcs/CONTEXT.md file
+2. Create the first .lcscore/CONTEXT.md file
 
 ## Relevant files
 - `lcs-core-prd.md` — final PRD
@@ -276,9 +276,9 @@ SKILL.md is the trigger file that makes LCS Core auto-load in every OpenCode ses
 
 **SKILL.md contents (specification, not full content):**
 1. Aggressive trigger description — loads whenever the user asks for coding work
-2. Step 1: Read `.lcs/CONTEXT.md` → understand the last known state
-3. Step 2: Read `.lcs/RULES.md` → comply with rules
-4. Step 3: Read `.lcs/ROADMAP.md` → know priorities
+2. Step 1: Read `.lcscore/CONTEXT.md` → understand the last known state
+3. Step 2: Read `.lcscore/RULES.md` → comply with rules
+4. Step 3: Read `.lcscore/ROADMAP.md` → know priorities
 5. Step 4: Work based on CONTEXT.md "Next action" OR user command
 6. Step 5: Before session ends → update CONTEXT.md
 7. Verification checklist — git log, state.md auto-generate, decision log
@@ -444,7 +444,7 @@ User: "Bikin fitur billing"
 
 #### 3.10.5 Explore Output
 
-One file: `.lcs/explore/{SRC-ID}/memo.md`
+One file: `.lcscore/explore/{SRC-ID}/memo.md`
 
 ```markdown
 ---
@@ -495,9 +495,9 @@ User said "Lanjut" → proceed to Execute
 User: "Continue yesterday's work"
 
 AI: [auto-load SKILL.md]
-  → read .lcs/CONTEXT.md
-  → read .lcs/RULES.md
-  → read .lcs/ROADMAP.md
+  → read .lcscore/CONTEXT.md
+  → read .lcscore/RULES.md
+  → read .lcscore/ROADMAP.md
   → see "Next action: Implement SKILL.md content"
   → start coding
 
@@ -510,9 +510,9 @@ Total token cost for context load: ~400-800 tokens (CONTEXT.md ~100 lines)
 User: "Implement login feature"
 
 AI: [auto-load SKILL.md]
-  → read .lcs/CONTEXT.md → understand project state
-  → read .lcs/RULES.md → know the rules
-  → read .lcs/ROADMAP.md → check if login is on the roadmap
+  → read .lcscore/CONTEXT.md → understand project state
+  → read .lcscore/RULES.md → know the rules
+  → read .lcscore/ROADMAP.md → check if login is on the roadmap
   → assign new SRC-ID
   → implement
   → update CONTEXT.md (new "Next action" if not finished)
@@ -559,7 +559,7 @@ SKILL.md at ~150 lines = ~400 tokens at load time. But this is a one-time cost p
 |---|---|---|
 | AI resumes work immediately without re-explanation | Open new session, prompt "Continue" — how many additional tokens does the AI require? | < 500 additional tokens |
 | AI consistently follows coding rules | Spot-check 10 commits — any RULES.md violations? | 0 violations |
-| Decision log gets written without being asked | `ls .lcs/decisions/` — is there a file for every non-trivial feature? | 1+ decision per complex SRC |
+| Decision log gets written without being asked | `ls .lcscore/decisions/` — is there a file for every non-trivial feature? | 1+ decision per complex SRC |
 | CONTEXT.md is always up-to-date | Check before session reset — does CONTEXT.md reflect the latest state? | 100% |
 | Roadmap is scannable at a glance | ROADMAP.md < 50 lines for a typical project | ✓ |
 | No state-vs-git inconsistency | state.md = derived from git log — no manual diff | 0 inconsistencies |
@@ -623,12 +623,12 @@ SKILL.md at ~150 lines = ~400 tokens at load time. But this is a one-time cost p
 
 If you previously used LCS v1:
 
-1. Delete `.lcs-core/state.md` (replaced by `.lcs/state.md` auto-generated)
-2. Delete `.lcs-core/deliverables/` (replaced by `.lcs/decisions/` + `CONTEXT.md`)
+1. Delete `.lcs-core/state.md` (replaced by `.lcscore/state.md` auto-generated)
+2. Delete `.lcs-core/deliverables/` (replaced by `.lcscore/decisions/` + `CONTEXT.md`)
 3. Delete old SKILL.md
 4. Install new SKILL.md
-5. Create `.lcs/CONTEXT.md`, `.lcs/RULES.md`, `.lcs/ROADMAP.md`
-6. Manually migrate any important decisions into `.lcs/decisions/` (optional)
+5. Create `.lcscore/CONTEXT.md`, `.lcscore/RULES.md`, `.lcscore/ROADMAP.md`
+6. Manually migrate any important decisions into `.lcscore/decisions/` (optional)
 
 ---
 

@@ -33,7 +33,7 @@
 
 ## Architecture
 - No speculative abstractions (YAGNI) — build what's needed, not what might be needed
-- Decisions that involve trade-offs MUST be recorded in `.lcs/decisions/`
+- Decisions that involve trade-offs MUST be recorded in `.lcscore/decisions/`
 - Dependencies: add only when necessary, prefer stdlib/native over third-party
 
 ## Documentation

@@ -2,7 +2,7 @@
 name: lcs-core
 description: >
   LCS Core — session handoff and project context system. Auto-loads when you ask an AI to do coding work
-  in any project that has a `.lcs/` directory. Provides immediate context (CONTEXT.md), enforces coding
+  in any project that has a `.lcscore/` directory. Provides immediate context (CONTEXT.md), enforces coding
   rules (RULES.md), shows the roadmap (ROADMAP.md), and tracks decisions (decisions/). Use for any coding
   task, feature work, bug fixing, refactoring, code review, or project navigation. Triggers on phrases
   like "continue work", "implement feature", "fix bug", "review code", "refactor", "explore codebase",
@@ -19,9 +19,9 @@ You are working in a project that uses LCS Core for session continuity. Follow t
 
 Read these files in order:
 
-1. **`.lcs/CONTEXT.md`** — Session handoff. Understand what we're building, where we stopped, and the next action. Read this first — it should be under 100 lines.
-2. **`.lcs/RULES.md`** — Coding rules. These are NOT suggestions. Comply with all rules. If you must violate a rule, note it in CONTEXT.md as a "known violation" with a reason.
-3. **`.lcs/ROADMAP.md`** — Project roadmap. Know the priorities. Do not change priority order without user confirmation.
+1. **`.lcscore/CONTEXT.md`** — Session handoff. Understand what we're building, where we stopped, and the next action. Read this first — it should be under 100 lines.
+2. **`.lcscore/RULES.md`** — Coding rules. These are NOT suggestions. Comply with all rules. If you must violate a rule, note it in CONTEXT.md as a "known violation" with a reason.
+3. **`.lcscore/ROADMAP.md`** — Project roadmap. Know the priorities. Do not change priority order without user confirmation.
 
 After loading, you should know:
 - What the project is building
@@ -33,7 +33,7 @@ After loading, you should know:
 
 ## Step 2: Understand Project State
 
-If `.lcs/state.md` exists, glance at it for a quick git-derived progress view.
+If `.lcscore/state.md` exists, glance at it for a quick git-derived progress view.
 
 If it doesn't exist yet, don't generate it automatically — do it when committed work needs to be tracked.
 
@@ -53,7 +53,7 @@ Based on what you found:
 
 ANY time you make a non-trivial decision (library choice, architecture pattern, trade-off, technology selection), record it:
 
-1. Create `.lcs/decisions/YYYY-MM-DD-slug.md`
+1. Create `.lcscore/decisions/YYYY-MM-DD-slug.md`
 2. Use the decision template: Context → Options → Decision → Consequences
 3. Include the SRC-ID if applicable
 
@@ -65,7 +65,7 @@ Decisions are the most expensive thing to re-discover. Write them.
 
 Before the session ends (or when context is running full):
 
-1. Update `.lcs/CONTEXT.md`:
+1. Update `.lcscore/CONTEXT.md`:
    - `last_session`: today's date
    - `status`: current state
    - `current_src`: the SRC-ID being worked on
@@ -83,7 +83,7 @@ Before the session ends (or when context is running full):
 Before considering work "done", verify:
 
 - [ ] CONTEXT.md reflects the latest state (updated within this session)
-- [ ] Any new decisions are recorded in `.lcs/decisions/`
+- [ ] Any new decisions are recorded in `.lcscore/decisions/`
 - [ ] Commit message follows `SRC-{ID}: imperative description` format
 - [ ] No RULES.md violations (or violations are documented)
 - [ ] state.md can be regenerated from git log (if script exists)

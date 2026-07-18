@@ -8,16 +8,16 @@ current_src: SRC-240718-bootstrap-lcs-core
 # Context: LCS Core
 
 ## What we're building
-A minimal session handoff & tracking system for personal coding projects. The `.lcs/` directory provides AI agents with persistent context across sessions — CONTEXT.md for resume, RULES.md for consistency, ROADMAP.md for priorities, decisions/ for architectural memory, and state.md for git-derived progress tracking.
+A minimal session handoff & tracking system for personal coding projects. The `.lcscore/` directory provides AI agents with persistent context across sessions — CONTEXT.md for resume, RULES.md for consistency, ROADMAP.md for priorities, decisions/ for architectural memory, and state.md for git-derived progress tracking.
 
 ## Where we stopped
 Phase 1 core files written: CONTEXT.md, RULES.md, ROADMAP.md, SKILL.md, generate-state.ps1. SKILL.md installed to ~/.config/opencode/skills/lcs-core/. All files committed as SRC-240718-bootstrap-lcs-core.
 
 ## Files being worked on
 - `lcs-core-prd.md` — PRD v2 (done, approved)
-- `.lcs/CONTEXT.md` — session handoff (writing now)
-- `.lcs/RULES.md` — coding rules (writing now)
-- `.lcs/ROADMAP.md` — project roadmap (writing now)
+- `.lcscore/CONTEXT.md` — session handoff (writing now)
+- `.lcscore/RULES.md` — coding rules (writing now)
+- `.lcscore/ROADMAP.md` — project roadmap (writing now)
 - `lcs-core/SKILL.md` — auto-load trigger (writing next)
 - `lcs-core/scripts/generate-state.ps1` — state.md generator (done)
 
@@ -31,7 +31,7 @@ Phase 1 core files written: CONTEXT.md, RULES.md, ROADMAP.md, SKILL.md, generate
 
 ## Architecture
 ```
-.lcs/
+.lcscore/
 ├── CONTEXT.md    ← session handoff (AI writes + reads)
 ├── RULES.md      ← coding rules (user writes once, AI reads)
 ├── ROADMAP.md    ← project roadmap (user maintains)
@@ -48,6 +48,6 @@ N/A — Phase 1 core files complete and committed. Next: test with 3 consecutive
 
 ## Relevant files
 - `lcs-core-prd.md`
-- `.lcs/CONTEXT.md`
-- `.lcs/RULES.md`
-- `.lcs/ROADMAP.md`
+- `.lcscore/CONTEXT.md`
+- `.lcscore/RULES.md`
+- `.lcscore/ROADMAP.md`
