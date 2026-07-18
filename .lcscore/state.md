@@ -1,7 +1,7 @@
 ﻿---
-generated: 2026-07-18T18:34:39+0700
+generated: 2026-07-18T18:40:32+0700
 source: git log --grep="SRC-" --oneline
-total_src: 4
+total_src: 6
 ---
 
 # LCS State (auto-generated from git log)
@@ -10,6 +10,8 @@ total_src: 4
 
 | SRC-ID | Commit | Status | Date |
 |---|---|---|---|
+| SRC-240718-autopilot-mode | b16555a SRC-240718-autopilot-mode: Add autopilot mode to SKILL.md and PRD | in_progress | 260718 |
+| SRC-240718-rename-lcscore | dc43dfb SRC-240718-rename-lcscore: Rename .lcs/ to .lcscore/ across all files | in_progress | 260718 |
 | SRC-240718-bootstrap-lcs-core | 1375f4c SRC-240718-bootstrap-lcs-core: Update CONTEXT.md status to done | in_progress | 260718 |
 | SRC-240718-bootstrap-lcs-core | 6ddacaf SRC-240718-bootstrap-lcs-core: Regenerate state.md after commits | in_progress | 260718 |
 | SRC-240718-bootstrap-lcs-core | 11be281 SRC-240718-bootstrap-lcs-core: Update ROADMAP status, fix script reference, regenerate state | in_progress | 260718 |
