@@ -279,11 +279,40 @@ SKILL.md is the trigger file that makes LCS Core auto-load in every OpenCode ses
 2. Step 1: Read `.lcscore/CONTEXT.md` → understand the last known state
 3. Step 2: Read `.lcscore/RULES.md` → comply with rules
 4. Step 3: Read `.lcscore/ROADMAP.md` → know priorities
-5. Step 4: Work based on CONTEXT.md "Next action" OR user command
-6. Step 5: Before session ends → update CONTEXT.md
-7. Verification checklist — git log, state.md auto-generate, decision log
+5. Step 4: Work — ambiguous tasks trigger Explore (3-question decision board)
+6. Step 5: After Explore → offer Autopilot mode (Y/N)
+7. Step 6: Autopilot: auto-execute all tasks with auto-commit, halt only on high-risk/architecture changes
+8. Step 7: Before session ends → update CONTEXT.md
+9. Verification checklist — git log, state.md auto-generate, decision log
 
-Total SKILL.md: ~150 lines.
+#### 3.9.1 Autopilot Mode
+
+After Explore completes and scope is clear, the AI MUST ask the user:
+
+> Autopilot mode? _(Y/N)_
+
+**If YES:**
+- AI executes ALL tasks from ROADMAP/Explore output until everything is `done`
+- Auto-commit after each logical change with `SRC-{ID}: description`
+- Zero user questions — AI makes the best decision and records it
+- Updates CONTEXT.md after every commit, regenerates state.md periodically
+
+**Autopilot stop triggers (AI MUST halt and write blocker note to CONTEXT.md):**
+| Trigger | Action |
+|---|---|
+| Architecture-level change (new service, split monolith, major DB schema change) | Halt + blocker note |
+| High-risk operation (data migration, auth changes, deployment config, breaking API) | Halt + blocker note |
+| External dependency not installed/configured | Halt + note what's needed |
+| Would violate RULES.md with no clear justification | Halt + note the conflict |
+| All tasks complete | Finalize CONTEXT.md with `done`, final commit |
+
+When autopilot halts, the user reviews the blocker note and decides — then can restart autopilot or switch to interactive.
+
+**If NO:**
+- Standard interactive workflow: explore → implement → ask → review
+- User consulted for decisions, approvals, and direction changes
+
+Total SKILL.md: ~200 lines.
 
 ### 3.10 Explore Protocol — The Anti-Hallucination Gate
 
@@ -405,7 +434,7 @@ If you want to explore further (deployment strategy, testing approach,
 observability), I can dive deeper.
 ```
 
-**If user says "Enough"** → AI closes the Explore SRC with status `done` and proceeds to Execute (same session or new SRC).
+**If user says "Enough"** → AI asks: **"Autopilot mode? (Y/N)"** — see §3.9.1 for protocol. Then proceeds to Execute (autopilot or interactive, same session or new SRC).
 
 **If user says "Lanjut explore detail X"** → AI enters **Explore Deep Dive** — one more round of 3 sub-questions focused on the area the user chose. Then check again.
 
@@ -427,19 +456,22 @@ User: "Bikin fitur billing"
    YES           NO
     │            │
     ▼            ▼
- [Execute]  ┌────────────────────────┐
-            │ Deep Dive (1 round)    │ ← 3 sub-questions
-            │ User pick/approve      │
-            └──────────┬─────────────┘
-                       ▼
-                 ┌── cukup? ──┐
-                 │            │
-                YES           NO
-                 │            │
-                 ▼            ▼
-              [Execute]  [→ Recommend Spec/PRD]
-                            lebih cocok untuk
-                            kompleksitas ini
+ [Autopilot?] ┌────────────────────────┐
+  │   │       │ Deep Dive (1 round)    │ ← 3 sub-questions
+ YES  NO      │ User pick/approve      │
+  │   │       └──────────┬─────────────┘
+  ▼   ▼                  ▼
+ [Auto] [Interactive] ┌── cukup? ──┐
+  │                     │            │
+  │                    YES           NO
+  │                     │            │
+  ▼                     ▼            ▼
+ Auto-execute        [Autopilot?] [→ Recommend Spec/PRD]
+ all tasks,            │   │         lebih cocok untuk
+ auto-commit,         YES  NO        kompleksitas ini
+ halt on risk          │   │
+                        ▼   ▼
+                    [Auto] [Interactive]
 ```
 
 #### 3.10.5 Explore Output

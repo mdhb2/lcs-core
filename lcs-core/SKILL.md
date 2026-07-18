@@ -47,6 +47,57 @@ Based on what you found:
 - If the user gave a specific command → execute that command.
 - If neither is clear → ask the user: "CONTEXT.md suggests X, but you asked for Y. Which should I prioritize?"
 
+### 3.1 Ambiguous Tasks → Explore First
+
+If the user's request is ambiguous, has multiple valid approaches, or you're not 100% confident about the codebase state:
+
+1. **Present 3 questions at once** — each with comparison table + recommendation (decision board pattern, NOT one-by-one Q&A)
+2. **Summarize + checkpoint** — show decisions made and explicitly ask: "Ready to proceed, or dive deeper?"
+3. **Max 2 rounds of Explore** — if still ambiguous after 2 rounds, recommend a formal Spec/PRD
+
+---
+
+### 3.2 Autopilot Mode
+
+**After Explore completes and scope is clear, ask the user:**
+
+> Autopilot mode? _(Y/N)_
+
+#### If YES (Autopilot):
+
+- Execute ALL tasks from the SOT/PRD/Explore output until everything is marked **done**
+- **Auto-commit** after each logical change with `SRC-{ID}: description`
+- **No questions to the user** — keep moving. Make the best decision and record it
+- Update `.lcscore/CONTEXT.md` after every commit
+- Regenerate `.lcscore/state.md` periodically
+
+**Stop conditions — Autopilot MUST halt and write a note:**
+
+| Trigger | Action |
+|---|---|
+| A change would **restructure the architecture** (e.g., new service, split monolith, change DB schema drastically) | Halt. Write to `.lcscore/CONTEXT.md`: *"Autopilot halted: [reason]. Needs your decision on [what]."* Mark current SRC as `blocked`. Commit the blocker note. |
+| A **high-risk operation** detected (data migration, auth changes, deployment config, breaking API changes) | Halt. Same as above. |
+| An **external dependency** is needed that isn't installed/configured | Halt. Note what's needed. |
+| A **rule in RULES.md would be violated** and there's no clear justification | Halt. Note the conflict. |
+| **All tasks complete** | Write final CONTEXT.md with status `done`. Final commit. |
+
+When autopilot halts, the user reviews the blocker note, decides, and can restart autopilot or switch to interactive.
+
+#### If NO (Interactive):
+
+- Standard interactive workflow: explore → implement → ask → review
+- User is consulted for decisions, approvals, and direction changes
+- Normal Q&A flow applies
+
+---
+
+### 3.3 During Autopilot Execution
+
+1. **Read `.lcscore/ROADMAP.md`** → work through tasks in priority order (P0 → P1 → P2)
+2. **For each task**: implement → test → commit → update CONTEXT → next task
+3. **Record decisions** in `.lcscore/decisions/` as they happen
+4. **If stuck** (error you can't fix in 2 attempts, unclear spec, missing information) → halt with blocker note
+
 ---
 
 ## Step 4: Decision Recording (MANDATORY)
