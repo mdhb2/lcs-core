@@ -52,8 +52,10 @@ Based on what you found:
 If the user's request is ambiguous, has multiple valid approaches, or you're not 100% confident about the codebase state:
 
 1. **Present 3 questions at once** — each with comparison table + recommendation (decision board pattern, NOT one-by-one Q&A)
-2. **Summarize + checkpoint** — show decisions made and explicitly ask: "Ready to proceed, or dive deeper?"
-3. **Max 2 rounds of Explore** — if still ambiguous after 2 rounds, recommend a formal Spec/PRD
+2. **Layperson translation** — if any question involves technical concepts (databases, networking, auth, infra), provide a plain-language explanation alongside the technical comparison
+3. **Summarize + checkpoint** — show decisions made and explicitly ask: "Ready to proceed, or dive deeper?"
+4. **Max 2 rounds of Explore** — if still ambiguous after 2 rounds, recommend a formal Spec/PRD
+5. **Write exploration output** to `.lcscore/explore/{SRC-ID}/memo.md` with: decisions made, what was ruled out, unknowns resolved
 
 ---
 
@@ -100,6 +102,19 @@ When autopilot halts, the user reviews the blocker note, decides, and can restar
 
 ---
 
+## SRC-ID Format
+
+Every unit of work is tracked by an SRC-ID: `SRC-{YYMMDD}-{slug}`
+
+**Rules:**
+- **Format:** `SRC-YYMMDD-slug-name` (e.g., `SRC-240718-implement-auth`)
+- **Slug:** max 5 words, lowercase, hyphens
+- **NO rename** on done — status is tracked in CONTEXT.md and state.md, not in the ID
+- **Mandatory** in commit messages: `SRC-{ID}: imperative description`
+- **One SRC-ID = one logical unit of work**
+
+---
+
 ## Step 4: Decision Recording (MANDATORY)
 
 ANY time you make a non-trivial decision (library choice, architecture pattern, trade-off, technology selection), record it:
@@ -118,12 +133,16 @@ Before the session ends (or when context is running full):
 
 1. Update `.lcscore/CONTEXT.md`:
    - `last_session`: today's date
-   - `status`: current state
+   - `status`: current state (`todo` | `in_progress` | `done` | `blocked`)
    - `current_src`: the SRC-ID being worked on
+   - **"What we're building"**: one-paragraph description if changed
    - **"Where we stopped"**: specific file:line, what was done, what's next
-   - **"Next action"**: ONE specific, actionable step — not "continue working"
    - **"Files being worked on"**: actual file paths, not the whole project
    - **"Key decisions made"**: new decisions since last update
+   - **"Architecture"**: quick sketch if the architecture changed
+   - **"Current blockers / open questions"**: note anything blocking progress
+   - **"Next action"**: ONE specific, actionable step — not "continue working"
+   - **"Relevant files"**: file paths being actively worked on
 2. Maximum 100 lines total — if longer, you're including too much detail
 3. Commit all changes with the SRC-ID: `SRC-{ID}: description`
 
