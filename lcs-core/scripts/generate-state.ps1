@@ -21,82 +21,81 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-# Resolve project root
-if (-not $Path) {
-    $Path = Get-Location
-}
-$projectRoot = Resolve-Path $Path
-
-# Find .git directory
-$gitDir = Join-Path $projectRoot '.git'
-if (-not (Test-Path $gitDir)) {
-    # Walk up to find .git
-    $current = $projectRoot
-    while ($current -and (Split-Path $current -Parent) -ne $current) {
-        if (Test-Path (Join-Path $current '.git')) {
-            $projectRoot = $current
-            break
-        }
-        $current = Split-Path $current -Parent
-    }
-    if (-not (Test-Path (Join-Path $projectRoot '.git'))) {
-        Write-Error "No .git directory found in or above: $Path"
-        exit 1
-    }
-}
-
-# Resolve output path
-if (-not $OutputFile) {
-    $OutputFile = Join-Path $projectRoot '.lcscore\state.md'
-}
-$lcsDir = Split-Path $OutputFile -Parent
-if (-not (Test-Path $lcsDir)) {
-    New-Item -ItemType Directory -Path $lcsDir -Force | Out-Null
-}
-
-# Query git log for SRC- commits
-$oldCwd = Get-Location
-Set-Location $projectRoot
+# Save and restore CWD regardless of exit path
+$originalCwd = Get-Location
 try {
-    $logOutput = git log --grep='SRC-' --oneline --format='%h %s %ad' --date=format:'%y%m%d' 2>&1
-    if ($LASTEXITCODE -ne 0) {
-        Write-Warning "git log returned an error. Generating empty state.md. Error: $logOutput"
-        $entries = @()
-    } else {
-        $entries = $logOutput | Where-Object { $_ -match 'SRC-\d{6}-' }
+    # Resolve project root
+    if (-not $Path) {
+        $Path = Get-Location
     }
-} finally {
-    Set-Location $oldCwd
-}
+    $projectRoot = Resolve-Path $Path
 
-# Build state.md
-$now = (Get-Date).ToString('yyyy-MM-ddTHH:mm:sszzz')
-$now = $now -replace '(.*)([\+\-]\d{2}):(\d{2})$', '$1$2$3'
-
-$total = $entries.Count
-
-$tableRows = ''
-foreach ($entry in $entries) {
-    if ($entry -match '^([a-f0-9]+)\s+(SRC-\d{6}-\S+):\s*(.*?)\s*(\d{6})$') {
-        $hash = $Matches[1]
-        $src = $Matches[2]
-        $msg = $Matches[3]
-        $date = $Matches[4]
-        # Infer status: if message starts with common "done" keywords, mark done; else in_progress
-        if ($msg -match '^(complete|finish|done|finalize)') {
-            $status = 'done'
-        } else {
-            $status = 'in_progress'
+    # Find .git directory
+    $gitDir = Join-Path $projectRoot '.git'
+    if (-not (Test-Path $gitDir)) {
+        # Walk up to find .git
+        $current = $projectRoot
+        while ($current -and (Split-Path $current -Parent) -ne $current) {
+            if (Test-Path (Join-Path $current '.git')) {
+                $projectRoot = $current
+                break
+            }
+            $current = Split-Path $current -Parent
         }
-        $tableRows += "| $src | $hash $src`:` $msg | $status | $date |`n"
+        if (-not (Test-Path (Join-Path $projectRoot '.git'))) {
+            Write-Error "No .git directory found in or above: $Path"
+            exit 1
+        }
     }
-}
 
-if (-not $tableRows) {
-    $tableRows = "| _(no SRC- commits found)_ | | | |`n"
-}
+    # Resolve output path
+    if (-not $OutputFile) {
+        $OutputFile = Join-Path $projectRoot '.lcscore\state.md'
+    }
+    $lcsDir = Split-Path $OutputFile -Parent
+    if (-not (Test-Path $lcsDir)) {
+        New-Item -ItemType Directory -Path $lcsDir -Force | Out-Null
+    }
 
-$content = @"
+    # Query git log for SRC- commits
+    Set-Location $projectRoot
+    try {
+        $logOutput = git log --grep='SRC-' --oneline --format='%h %s %ad' --date=format:'%y%m%d' 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            Write-Warning "git log returned an error. Generating empty state.md. Error: $logOutput"
+            $entries = @()
+        } else {
+            # Note: \d{6} matches any 6 digits, not strictly YYMMDD. Loose match by design.
+            $entries = $logOutput | Where-Object { $_ -match 'SRC-\d{6}-' }
+        }
+    } finally {
+        Set-Location $projectRoot | Out-Null  # back to project root, outer finally handles original CWD
+    }
+
+    # Build state.md
+    $now = (Get-Date).ToString('yyyy-MM-ddTHH:mm:sszzz')
+    $now = $now -replace '(.*)([\+\-]\d{2}):(\d{2})$', '$1$2$3'
+
+    $total = $entries.Count
+
+    $tableRows = ''
+    foreach ($entry in $entries) {
+        # Match: <hash> <SRC-ID>: <message> <YYMMDD>
+        # Using greedy (.+) for message so the last token is always the git %ad date
+        if ($entry -match '^([a-f0-9]+)\s+(SRC-\d{6}-\S+):\s*(.+)\s+(\d{6})$') {
+            $hash  = $Matches[1]
+            $src   = $Matches[2]
+            $msg   = $Matches[3]
+            $date  = $Matches[4]
+            $tableRows += "| $src | $hash $src`:` $msg | - | $date |`n"
+        }
+    }
+
+    if (-not $tableRows) {
+        $tableRows = "| _(no SRC- commits found)_ | | | |`n"
+    }
+
+    $content = @"
 ---
 generated: $now
 source: git log --grep="SRC-" --oneline
@@ -106,13 +105,17 @@ total_src: $total
 # LCS State (auto-generated from git log)
 
 > Do not edit this file. Regenerate with: `lcs-core/scripts/generate-state.ps1`
+> Status is tracked in CONTEXT.md and ROADMAP.md — state.md shows git data only.
 
 | SRC-ID | Commit | Status | Date |
 |---|---|---|---|
 $tableRows
 "@
 
-Set-Content -Path $OutputFile -Value $content -Encoding UTF8
+    Set-Content -Path $OutputFile -Value $content -Encoding UTF8
 
-Write-Host "state.md generated: $OutputFile"
-Write-Host "Total SRC entries: $total"
+    Write-Host "state.md generated: $OutputFile"
+    Write-Host "Total SRC entries: $total"
+} finally {
+    Set-Location $originalCwd
+}

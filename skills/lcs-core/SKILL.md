@@ -17,11 +17,11 @@ You are working in a project that uses LCS Core for session continuity. Follow t
 
 ## Step 1: Load Context
 
-Read these files in order:
+Read these files in order. **If a file doesn't exist yet, skip it and proceed.**
 
-1. **`.lcscore/CONTEXT.md`** — Session handoff. Understand what we're building, where we stopped, and the next action. Read this first — it should be under 100 lines.
-2. **`.lcscore/RULES.md`** — Coding rules. These are NOT suggestions. Comply with all rules. If you must violate a rule, note it in CONTEXT.md as a "known violation" with a reason.
-3. **`.lcscore/ROADMAP.md`** — Project roadmap. Know the priorities. Do not change priority order without user confirmation.
+1. **`.lcscore/CONTEXT.md`** — Session handoff. Understand what we're building, where we stopped, and the next action. Read this first — it should be under 100 lines. **If missing:** this is a fresh project. Ask the user what they're building and bootstrap CONTEXT.md.
+2. **`.lcscore/RULES.md`** — Coding rules. These are NOT suggestions. Comply with all rules. If you must violate a rule, note it in CONTEXT.md as a "known violation" with a reason. **If missing:** work without explicit rules, but follow general best practices.
+3. **`.lcscore/ROADMAP.md`** — Project roadmap. Know the priorities. Do not change priority order without user confirmation. **If missing:** ask the user for priorities or work from their explicit instructions.
 
 After loading, you should know:
 - What the project is building
@@ -68,7 +68,7 @@ If the user's request is ambiguous, has multiple valid approaches, or you're not
 #### If YES (Autopilot):
 
 - Execute ALL tasks from the SOT/PRD/Explore output until everything is marked **done**
-- **Auto-commit** after each logical change with `SRC-{ID}: description`
+- **Auto-commit** after each logical change with `SRC-{ID}: description` — but verify the change compiles/tests pass before committing. Never commit broken code.
 - **No questions to the user** — keep moving. Make the best decision and record it
 - Update `.lcscore/CONTEXT.md` after every commit
 - Regenerate `.lcscore/state.md` periodically
@@ -163,10 +163,10 @@ Before considering work "done", verify:
 
 ## Token Budget Awareness
 
-- CONTEXT.md should be under 100 lines (~300 tokens)
-- RULES.md should be under 60 lines (~200 tokens)
-- ROADMAP.md should be under 50 lines (~150 tokens)
-- Total context load: under 1,000 tokens including this SKILL.md
+- CONTEXT.md should be under 100 lines (~500 tokens)
+- RULES.md should be under 60 lines (~300 tokens)
+- ROADMAP.md should be under 50 lines (~250 tokens)
+- Total context load: under 1,800 tokens including this SKILL.md (~1,200 tokens)
 
 If any file is growing too large, it needs trimming — not more detail.
 

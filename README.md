@@ -14,7 +14,7 @@ npx skills add https://github.com/mdhb2/lcs-core
 
 Every fresh AI session starts with zero context. You waste 40-60% of tokens just getting the AI up to speed — re-discovering architecture, re-reading files, and re-asking questions you already answered yesterday.
 
-LCS Core solves this by saving **a small amount of strategic context** (not a log of everything) so the AI can resume work in under 1,000 tokens.
+LCS Core solves this by saving **a small amount of strategic context** (not a log of everything) so the AI can resume work in under 1,800 tokens.
 
 ---
 
@@ -90,7 +90,7 @@ Then customize for your project:
 git clone https://github.com/mdhb2/lcs-core.git
 
 # 2. Copy the skill to your agent's skills directory
-cp -r lcs-core/skills/lcs-core ~/.config/opencode/skills/lcs-core
+cp -r skills/lcs-core ~/.config/opencode/skills/lcs-core
 ```
 
 The skill auto-loads whenever you ask the AI to do coding work in any project that has a `.lcscore/` directory.
@@ -199,9 +199,9 @@ New session: AI reads CONTEXT.md → resumes from file:line without asking
 
 | Scenario | Tokens |
 |---|---|
-| New session context load (SKILL + CONTEXT + RULES + ROADMAP) | < 1,000 |
+| New session context load (SKILL + CONTEXT + RULES + ROADMAP) | < 1,800 |
 | Without LCS Core (re-explore codebase from scratch) | 3,000-8,000 |
-| **Savings** | **75-90%** |
+| **Savings** | **40-75%** |
 
 ---
 

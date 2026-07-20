@@ -15,7 +15,7 @@ Phase 1 complete. Restructured repo for `npx skills add` compatibility — moved
 
 ## Files being worked on
 - `lcs-core-prd.md` — PRD v2 (finalized)
-- `lcs-core/SKILL.md` — auto-load trigger + autopilot + explore protocol
+- `skills/lcs-core/SKILL.md` — auto-load trigger + autopilot + explore protocol
 - `lcs-core/README.md` — English documentation
 - `cli/index.js` — npx CLI installer (skills add/list/remove/scaffold)
 - `package.json` — npm package config for npx compatibility
