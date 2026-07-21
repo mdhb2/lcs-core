@@ -1,7 +1,7 @@
 ---
 project: lcs-core
 last_session: 2026-07-21
-status: in_progress
+status: done
 current_src: SRC-240721-lcs-core-revision
 ---
 
@@ -41,7 +41,7 @@ Revising lcs-core SKILL.md — added coding gate, artifact consistency contract,
 - None
 
 ## Next action
-Complete final verification wave for lcs-core-revision.
+Review and merge P0-P1 fixes from lcs-core-revision review.
 
 ## Relevant files
 - `skills/lcs-core/SKILL.md`

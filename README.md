@@ -74,13 +74,15 @@ npx skills add https://github.com/mdhb2/lcs-core -y
 After installing the skill, create the `.lcscore/` directory in your project:
 
 ```bash
-mkdir .lcscore .lcscore/decisions .lcscore/explore
+mkdir .lcscore .lcscore/work-items
 ```
 
 Then customize for your project:
 - Edit `.lcscore/RULES.md` — your coding standards
 - Edit `.lcscore/ROADMAP.md` — your project tasks and priorities
 - `.lcscore/CONTEXT.md` — the AI maintains this automatically
+
+> **Note:** The `.lcscore/work-items/` directory holds all per-task artifacts: explore.md, decisions.md, prd.md, task.md.
 
 ### Manual Install
 
@@ -145,6 +147,8 @@ Every non-trivial decision (library choice, architecture, trade-off) is recorded
 - Options considered with pros/cons
 - Final decision with rationale
 - Consequences and action items
+
+Saved to `.lcscore/work-items/{YYMMDD-slug}/decisions.md`.
 
 ### State Tracking (state.md)
 

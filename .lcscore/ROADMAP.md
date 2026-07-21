@@ -20,13 +20,18 @@
 | 14 | Test: Switch projects, switch back | SRC-240718-switch-test | todo | P1 |
 | 15 | Revise lcs-core: coding gate, artifact contract, folder convention | SRC-240721-lcs-core-revision | done | P0 |
 
-## Backlog
+## Backlog (v1)
 
 | # | Idea | Added |
 |---|---|---|
 | 1 | Decision template CLI / prompt | 240718 |
 | 2 | Cross-project dashboard | 240718 |
-| 3 | Chain of Truth verification protocol | 240718 |
-| 4 | 7-phase pipeline (explore→PRD→SRS→slice→execute→review→finalize) | 240718 |
-| 5 | Multi-platform support (Claude Code, Codex) | 240718 |
-| 6 | Self-improvement analyzer | 240718 |
+| 3 | Self-improvement analyzer | 240718 |
+
+## v2 Ideas (post-v1)
+
+| # | Idea | Added |
+|---|---|---|
+| 1 | Multi-platform support (Claude Code, Codex) | 240718 |
+| 2 | Chain of Truth verification protocol | 240718 |
+| 3 | 7-phase pipeline (explore→PRD→SRS→slice→execute→review→finalize) | 240718 |
