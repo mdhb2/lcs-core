@@ -27,8 +27,7 @@ your-project/
     ├── RULES.md                ← Coding standards the AI must follow
     ├── ROADMAP.md              ← Project tasks with priorities
     ├── state.md                ← Auto-generated from git log
-    ├── decisions/              ← Architectural decisions (mandatory)
-    └── explore/                ← Pre-implementation alignment memos
+    └── work-items/             ← All work artifacts per task (explore.md, prd.md, task.md, decisions.md)
 ```
 
 **When you open a new session:**
@@ -105,8 +104,7 @@ The skill auto-loads whenever you ask the AI to do coding work in any project th
 | **RULES.md** | You (once) | Coding rules the AI must follow |
 | **ROADMAP.md** | You (periodically) | Feature list with priorities |
 | **state.md** | Auto-generated | Git-derived progress view |
-| **decisions/** | AI (when needed) | Architectural decision log |
-| **explore/** | AI (when needed) | Pre-implementation alignment memos |
+| **work-items/** | AI (per task) | All artifacts per task: explore.md, decisions.md, prd.md, task.md |
 
 ---
 
@@ -131,7 +129,7 @@ Before any ambiguous task, the AI presents **3 questions at once** — each with
 
 - Plain-language translations for technical concepts
 - Max 2 rounds — if still ambiguous, recommends a formal Spec/PRD
-- Output saved to `.lcscore/explore/{SRC-ID}/memo.md`
+- Output saved to `.lcscore/work-items/{YYMMDD-slug}/explore.md`
 
 ### Autopilot Mode
 
