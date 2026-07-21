@@ -18,6 +18,7 @@
 | 12 | Test: 3 consecutive sessions | SRC-240718-session-test | todo | P1 |
 | 13 | Test: Reset mid-feature, resume | SRC-240718-reset-test | todo | P1 |
 | 14 | Test: Switch projects, switch back | SRC-240718-switch-test | todo | P1 |
+| 15 | Revise lcs-core: coding gate, artifact contract, folder convention | SRC-240721-lcs-core-revision | done | P0 |
 
 ## Backlog
 
